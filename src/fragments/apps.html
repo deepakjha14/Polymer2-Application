@@ -1,0 +1,26 @@
+<link rel="import" href="../../bower_components/polymer/polymer-element.html">
+
+<dom-module id="app-view">
+  <template>
+    <style include="shared-styles">
+      :host {
+        display: block;
+
+        padding: 10px;
+      }
+    </style>
+
+    <div class="card">
+      <div class="circle">1</div>
+      <h1>App View</h1>
+      </div>
+  </template>
+
+  <script>
+    class AppView extends Polymer.Element {
+      static get is() { return 'app-view'; }
+    }
+
+    window.customElements.define(AppView.is, AppView);
+  </script>
+</dom-module>

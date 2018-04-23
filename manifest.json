@@ -1,0 +1,7 @@
+{
+  "name": "DeliveryNext-Polymer2",
+  "short_name": "DeliveryNext-Polymer2",
+  "description": "BMW Delivery next",
+  "start_url": "/",
+  "display": "standalone"
+}

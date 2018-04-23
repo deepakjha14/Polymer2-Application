@@ -1,0 +1,50 @@
+<link rel="import" href="../../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../redux-store/redux-store.html">
+
+<dom-module id="admin-view">
+  <template>
+    <style include="shared-styles">
+      :host {
+        display: block;
+
+        padding: 10px;
+      }
+    </style>
+
+    <div class="card">
+      <div class="circle">1</div>
+      <h1>Admin View</h1>
+        list of added friends are [[friendsCount]], and [[friends]]
+      </div>
+  </template>
+
+  <script>
+    class AdminView extends ReduxMixin(Polymer.Element) {
+      static get is() { return 'admin-view'; }
+      static get properties(){
+          return {
+              friends:{
+                  type:Array,
+                  statePath:'friends'
+              },
+              friendsCount:{
+                  type:Number,
+                  computed: (friends)=>friends.length
+              }
+          }
+      }
+      connectedCallback(){
+        super.connectedCallback();
+        console.log(this.friends,'Friends initial value');
+      }
+    }
+
+    window.customElements.define(AdminView.is, AdminView);
+  </script>
+</dom-module>
+<!--
+,
+              friendsCount:{
+                  type:Number,
+                  computed: (friends)=>friends.length
+              }-->

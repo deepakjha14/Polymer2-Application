@@ -1,0 +1,60 @@
+<link rel="import" href="../../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../../bower_components/iron-pages/iron-pages.html">
+
+<link rel="import" href="../fragments/apps.html">
+<link rel="import" href="../fragments/home.html">
+<link rel="import" href="../fragments/friends.html">
+<link rel="import" href="../fragments/admin.html">
+
+<dom-module id="route-display">
+  <template>
+    <style include="shared-styles">
+      :host {
+        display: block;
+        margin-top:100px;
+        margin-left:200px;
+        padding: 10px;
+      }
+    </style>
+
+    display route
+    <iron-pages selected="{{routeData}}" attr-for-selected="name">
+        <app-view name="Apps"></app-view>
+        <home-view name="Home"></home-view>
+        <friends-view name="User"></friends-view>
+        <admin-view name="Admin"></admin-view>
+    </iron-pages>
+  </template>
+
+  <script>
+    class RouteDisplay extends Polymer.Element {
+      static get is() { return 'route-display'; }
+      static get properties() {
+        return {
+            routeData: {
+            type: Object,
+            value:{},
+            observer:"_routeChangeNotified",
+            notify:true
+          },
+          name:{
+            type:String,
+            notify:true
+          }
+        };
+      }
+      connectedCallback(){
+        super.connectedCallback();
+        window.addEventListener('customer-route-change', function(e){
+                                                        this.routeData = e.detail.nwRoute;
+                                                        //console.log(this.routeData,'Customer Value:- ', e);
+                                                      }.bind(this));
+      }
+      _routeChangeNotified(nw,od){
+          //console.log("This is from the routedisplay element", nw, od);
+      }
+    }
+
+    window.customElements.define(RouteDisplay.is, RouteDisplay);
+  </script>
+</dom-module>

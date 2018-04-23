@@ -1,0 +1,56 @@
+<link rel="import" href="../../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../redux-store/redux-store.html">
+
+<script src="../../node_modules/redux/dist/redux.js"></script>
+
+<dom-module id="friends-view">
+  <template>
+    <style include="shared-styles">
+      :host {
+        display: block;
+        padding: 10px;
+      }
+    </style>
+
+    <div class="card">
+      <h1>Friends View [[friends]]</h1>
+      Enter New Friend
+      <input type="text" id="nwFriend" placeholder="Enter Friends Name" on-change="updateList">
+      </div>
+  </template>
+
+  <script>
+    class FriendsView extends ReduxMixin(Polymer.Element) {
+      static get is() { return 'friends-view';}
+      static get properties(){
+          return{
+            friends:{
+              type:Array,
+              statePath:'friends'
+            },
+            message:{
+                type:String,
+                statePath:'message'
+            }
+          }
+      }
+      static get observers() {
+        return [
+        // Observer method name, followed by a list of dependencies, in parenthesis
+        'userListChanged(friends)'
+        ]
+      }
+      updateList(){
+          console.log('Input changed');
+          let newAddition = this.$.nwFriend.value;
+          this.dispatch({type:'ADD_FRIEND',
+          newValue: newAddition});
+      }
+      userListChanged(changedMessage){
+        console.log(changedMessage, " Message changed property");
+      }
+    }
+
+    window.customElements.define(FriendsView.is, FriendsView);
+  </script>
+</dom-module>

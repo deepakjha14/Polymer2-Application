@@ -1,0 +1,123 @@
+<link rel="import" href="../../bower_components/app-route/app-location.html">
+<link rel="import" href="../../bower_components/app-route/app-route.html">
+<link rel="import" href="../../bower_components/iron-pages/iron-pages.html">
+<link rel="import" href="../../bower_components/iron-selector/iron-selector.html">
+<link rel="import" href="../fragments/apps.html">
+<link rel="import" href="../fragments/home.html">
+
+<link rel="import" href="../../bower_components/polymer/polymer-element.html">
+
+<dom-module id="side-bar">
+  <template>
+    <style>
+        :host {
+          background-color:#fafbfc;
+          height:100%;
+          padding-top:20px;
+          display: inline-block;
+          margin-top: 67px;
+          width: 15%;
+          margin-bottom: 80px;
+          left: 0;
+          top: 0;
+          position: absolute !important;
+          z-index: -1;
+          box-shadow: 0 2px 5px 0 rgba(0,0,0,0.16), 0 2px 10px 0 rgba(0,0,0,0.12);
+        }
+
+        img{
+            height: 100px;
+            padding-left: 23%;
+            display: block;
+        }
+
+        .navigation-links{
+            margin-top:10px;
+            display: block;
+            text-decoration: none;
+            width: 100%;
+            padding: 7px 0px 7px 0px;
+            font-family: "Segoe UI",Arial,sans-serif;
+            font-size: 15px;
+        }
+        
+        a.navigation-links:hover, a.navigation-links:active{
+            background-color: #2b89f6;
+            color: white;
+            font-weight:600;
+        }
+
+        .linkHolder{
+            text-align: center;
+            margin-top: 20px;
+        }
+    </style>
+
+    <app-location route="{{route}}"></app-location>
+
+    <app-route route="{{route}}"
+        pattern="/:id"
+        data="{{routeData}}"
+        tail="{{routeTail}}"
+        active="{{aboutActive}}"></app-route>
+
+    <img src="./src/multimedia/bmwLogo.png"></img>
+    <iron-selector role="navigation" selected="[[routeData.id]]" attr-for-selected="name" 
+        class="drawer-list">
+      <div class="linkHolder">
+        Navigation Links
+        <a name="Home" href="/Home" class="navigation-links">Home</a>
+        <a name="Apps" href="/Apps" class="navigation-links">Apps</a>
+        <a name="User" href="/User" class="navigation-links">User</a>
+        <a name="Admin" href="/Admin" class="navigation-links">Admin</a>
+      </div>
+    </iron-selector>
+    <!--<iron-pages selected="{{routeData.id}}" attr-for-selected="name">
+        <app-view name="Apps"></app-view>
+        <home-view name="Home"></home-view>
+    </iron-pages>-->
+  </template>
+
+  <script>
+    /**
+     * @customElement
+     * @polymer
+     */
+    class SideBar extends Polymer.Element {
+      static get is() { return 'side-bar'; }
+      static get properties() {
+        return {
+          prop1: {
+            type: String,
+            value: 'side-bar'
+          },
+          name:{
+              type:String,
+              notify:true
+          },
+          routeData: {
+              type: Object,
+              notify: true,
+              observer: "_changedValue"
+          }
+        };
+      }
+      _changedValue(nw, od){
+          console.log("Value Changed", nw, od);
+          this.dispatchEvent(
+          new CustomEvent('customer-route-change', 
+                          { bubbles: true, 
+                            composed: true, 
+                            detail : {
+                              nwRoute:nw.id, 
+                              odRoute:od.id,
+                              place:"side-bar"
+                            }
+                          }
+        ));
+      }
+    }
+
+    window.customElements.define(SideBar.is, SideBar);
+  </script>
+</dom-module>

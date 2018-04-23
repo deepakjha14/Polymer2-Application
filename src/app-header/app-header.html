@@ -1,0 +1,63 @@
+<link rel="import" href="../../bower_components/polymer/polymer-element.html">
+
+<dom-module id="app-header">
+  <template>
+    <style>
+        :host {
+          display: block;
+          top:0;
+          left:0;
+          position:fixed;
+          background-color:#24292e;
+          color:#2b89f6;
+          text-align:center;
+          width:100%;
+        }
+
+        .imgContainer{
+          left: 20px;
+          top: 20px;
+          height: 30px;
+          color:#ffff;
+          display:inline;
+          position:fixed;
+        }
+
+        img.hamIcon{
+          height:30px;
+        }
+
+        img~span{
+          margin-left: 10px;
+          /* vertical-align: top; */
+          position: absolute;
+          width: 100px;
+          padding-top: 5px;
+        }
+    </style>
+    <div class="imgContainer">
+        <img src="./src/multimedia/ham-menu.png" class="hamIcon"></img><span>Delivery Next</span>
+    </div>
+    <h2>BMW Header Element</h2>
+  </template>
+
+  <script>
+    /**
+     * @customElement
+     * @polymer
+     */
+    class AppHeader extends Polymer.Element {
+      static get is() { return 'app-header'; }
+      static get properties() {
+        return {
+          prop1: {
+            type: String,
+            value: 'app-header'
+          }
+        };
+      }
+    }
+
+    window.customElements.define(AppHeader.is, AppHeader);
+  </script>
+</dom-module>

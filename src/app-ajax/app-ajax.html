@@ -1,0 +1,56 @@
+<link rel="import" href="../../bower_components/polymer/polymer-element.html">
+
+<dom-module id="app-ajax">
+  <template>
+    <style>
+        :host {
+          display: none;
+        }
+    </style>
+  </template>
+
+  <script>
+    /**
+     * @customElement
+     * @polymer
+     */
+    class AppAjax extends Polymer.Element {
+      static get is() { return 'app-ajax'; }
+      static get properties() {
+        return {
+          url: {
+            type: String,
+            notify:true
+          },
+          method: {
+            type: String,
+            notify:true
+          },
+          params:{
+              type:String,
+              notify:true
+          }
+        };
+      }
+      createAjaxCall(method, url){
+        return new Promise((resolve, reject)=>{
+            var xhr = new XMLHttpRequest();
+            xhr.open(method, url);
+            xhr.onload = function () {
+            console.log(xhr);
+            if (this.status >= 200 && this.status < 300) {
+                resolve(xhr.response);
+            } else {
+                reject({
+                status: this.status,
+                statusText: xhr.statusText});
+            }
+        };
+        xhr.send();
+        });
+      }
+    }
+
+    window.customElements.define(AppAjax.is, AppAjax);
+  </script>
+</dom-module>

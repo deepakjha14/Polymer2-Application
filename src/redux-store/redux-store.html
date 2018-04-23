@@ -1,0 +1,34 @@
+<link rel="import" href="../../bower_components/polymer-redux/polymer-redux.html">
+
+<script>
+    const initialState = {
+        friends :['Initial value'],
+        message:"first message from redux"
+    };
+
+    const reducer = (state, action)=>{
+        console.log('Inside the reducer',state,action);
+        //if(!state) return initialState;
+        switch (action.type){
+            case 'ADD_FRIEND': 
+            //console.log('Finally in the add friends action');
+            const friends = state.friends.slice(0);
+            friends.push(action.newValue);
+            return Object.assign({}, state, { friends: friends });
+            default: 
+            console.log('Default param');
+            return state;
+        }
+    };
+
+    const store = Redux.createStore(
+        reducer, 
+        initialState,
+        // The best part 8)
+        Redux.compose(
+            window.devToolsExtension
+            ? window.devToolsExtension()
+            : v => v
+        ));
+    ReduxMixin = PolymerRedux(store);
+</script>

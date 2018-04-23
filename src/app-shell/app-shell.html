@@ -1,0 +1,63 @@
+<link rel="import" href="../../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../app-header/app-header.html">
+<link rel="import" href="../side-bar/side-bar.html">
+<link rel="import" href="../app-ajax/app-ajax.html">
+<link rel="import" href="../fragments/route-display.html">
+
+<dom-module id="app-shell">
+  <template>
+    <style>
+      :host {
+        display: block;
+      }
+      button{
+        display:block;
+        position:relative;
+        background-color:pink;
+      }
+      .body-position{
+        display:flex;
+        justify-content: flex-start;
+      }
+      .side-bar-position{
+        flex:1;
+        order:1;
+      }
+      .route-display-position{
+        flex:1;
+        order:2;
+      }
+    </style>
+    <app-header></app-header>
+    <div class="body-position">
+        <side-bar ></side-bar>
+        <route-display ></route-display>
+      <!--<div class="side-bar-position">
+        <side-bar ></side-bar>
+      </div>
+      <div class="route-display-position">
+        <route-display ></route-display>
+      </div>-->
+    </div>
+  </template>
+
+  <script>
+    /**
+     * @customElement
+     * @polymer
+     */
+    class AppShell extends Polymer.Element {
+      static get is() { return 'app-shell'; }
+      static get properties() {
+        return {
+          prop1: {
+            type: String,
+            value: 'app-shell'
+          }
+        };
+      }
+    }
+
+    window.customElements.define(AppShell.is, AppShell);
+  </script>
+</dom-module>
