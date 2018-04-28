@@ -2,7 +2,7 @@
 
 <script>
     const initialState = {
-        friends :['Initial value'],
+        users :['First User'],
         message:"first message from redux"
     };
 
@@ -10,11 +10,11 @@
         console.log('Inside the reducer',state,action);
         //if(!state) return initialState;
         switch (action.type){
-            case 'ADD_FRIEND': 
-            //console.log('Finally in the add friends action');
-            const friends = state.friends.slice(0);
-            friends.push(action.newValue);
-            return Object.assign({}, state, { friends: friends });
+            case 'ADD_USER': 
+            console.log('Finally in the add Users action');
+            const users = state.users.slice(0);
+            users.push(action.newValue);
+            return Object.assign({}, state, { users: users });
             default: 
             console.log('Default param');
             return state;

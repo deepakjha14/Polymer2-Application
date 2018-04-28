@@ -3,7 +3,7 @@
 
 <script src="../../node_modules/redux/dist/redux.js"></script>
 
-<dom-module id="friends-view">
+<dom-module id="users-view">
   <template>
     <style include="shared-styles">
       :host {
@@ -13,20 +13,20 @@
     </style>
 
     <div class="card">
-      <h1>Friends View [[friends]]</h1>
-      Enter New Friend
-      <input type="text" id="nwFriend" placeholder="Enter Friends Name" on-change="updateList">
+      <h1>Users View [[users]]</h1>
+      Enter New User
+      <input type="text" id="nwUser" placeholder="Enter Users Name" on-change="updateList">
       </div>
   </template>
 
   <script>
-    class FriendsView extends ReduxMixin(Polymer.Element) {
-      static get is() { return 'friends-view';}
+    class UsersView extends ReduxMixin(Polymer.Element) {
+      static get is() { return 'users-view';}
       static get properties(){
           return{
-            friends:{
+            users:{
               type:Array,
-              statePath:'friends'
+              statePath:'users'
             },
             message:{
                 type:String,
@@ -37,20 +37,20 @@
       static get observers() {
         return [
         // Observer method name, followed by a list of dependencies, in parenthesis
-        'userListChanged(friends)'
+        'userListChanged(users)'
         ]
       }
       updateList(){
-          console.log('Input changed');
-          let newAddition = this.$.nwFriend.value;
-          this.dispatch({type:'ADD_FRIEND',
+          //console.log('Input changed');
+          let newAddition = this.$.nwUser.value;
+          this.dispatch({type:'ADD_USER',
           newValue: newAddition});
       }
       userListChanged(changedMessage){
-        console.log(changedMessage, " Message changed property");
+        //console.log(changedMessage, " Message changed property");
       }
     }
 
-    window.customElements.define(FriendsView.is, FriendsView);
+    window.customElements.define(UsersView.is, UsersView);
   </script>
 </dom-module>

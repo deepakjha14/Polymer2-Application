@@ -12,9 +12,8 @@
     </style>
 
     <div class="card">
-      <div class="circle">1</div>
       <h1>Admin View</h1>
-        list of added friends are [[friendsCount]], and [[friends]]
+        list of added friends are [[usersCount]], and [[users]]
       </div>
   </template>
 
@@ -23,15 +22,18 @@
       static get is() { return 'admin-view'; }
       static get properties(){
           return {
-              friends:{
+              users:{
                   type:Array,
-                  statePath:'friends'
+                  statePath:'users'
               },
-              friendsCount:{
+              usersCount:{
                   type:Number,
-                  computed: (friends)=>friends.length
+                  computed : 'computefriendsCount(users)'
               }
           }
+      }
+      computefriendsCount(users){
+        return users.length;
       }
       connectedCallback(){
         super.connectedCallback();

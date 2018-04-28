@@ -3,7 +3,7 @@
 
 <link rel="import" href="../fragments/apps.html">
 <link rel="import" href="../fragments/home.html">
-<link rel="import" href="../fragments/friends.html">
+<link rel="import" href="../fragments/users.html">
 <link rel="import" href="../fragments/admin.html">
 
 <dom-module id="route-display">
@@ -11,17 +11,17 @@
     <style include="shared-styles">
       :host {
         display: block;
-        margin-top:100px;
-        margin-left:200px;
         padding: 10px;
+        background-color: #ffff;
+        box-shadow: 0 2px 5px 0 rgba(0,0,0,0.16), 0 2px 10px 0 rgba(0,0,0,0.12);
+        margin: 10px;
+        margin-left:20px;
       }
     </style>
-
-    display route
-    <iron-pages selected="{{routeData}}" attr-for-selected="name">
+    <iron-pages selected="[[routeData]]" attr-for-selected="name" fallback-selection="Home">
         <app-view name="Apps"></app-view>
         <home-view name="Home"></home-view>
-        <friends-view name="User"></friends-view>
+        <users-view name="User"></users-view>
         <admin-view name="Admin"></admin-view>
     </iron-pages>
   </template>
@@ -51,7 +51,8 @@
                                                       }.bind(this));
       }
       _routeChangeNotified(nw,od){
-          //console.log("This is from the routedisplay element", nw, od);
+          console.log("RouteChange Notified", nw, od);
+          this.routeData = window.location.pathname.split('\/')[1];
       }
     }
 
