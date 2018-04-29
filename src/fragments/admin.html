@@ -1,5 +1,8 @@
 <link rel="import" href="../../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../../bower_components/polymer/lib/elements/dom-repeat.html">
 <link rel="import" href="../redux-store/redux-store.html">
+
+<link rel="import" href="./userCard.html">
 
 <dom-module id="admin-view">
   <template>
@@ -9,12 +12,21 @@
 
         padding: 10px;
       }
+      h1{
+          border-bottom: 2px solid #f1f1f1;
+      }
     </style>
+    <h1>Admin View</h1>
+    List of added Users are [[usersCount]]
+    <dom-repeat items="{{users}}">
+      <template>
+        <user-card>
+            <span slot="usrname"> [[item.name]]</span>
+            <span slot="usroccupation"> [[item.department]]</span>
+          </user-card>
+      </template>
+    </dom-repeat>
 
-    <div class="card">
-      <h1>Admin View</h1>
-        list of added friends are [[usersCount]], and [[users]]
-      </div>
   </template>
 
   <script>
@@ -37,16 +49,10 @@
       }
       connectedCallback(){
         super.connectedCallback();
-        console.log(this.friends,'Friends initial value');
+        console.log(this.users,'Friends initial value');
       }
     }
 
     window.customElements.define(AdminView.is, AdminView);
   </script>
 </dom-module>
-<!--
-,
-              friendsCount:{
-                  type:Number,
-                  computed: (friends)=>friends.length
-              }-->

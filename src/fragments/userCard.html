@@ -1,0 +1,56 @@
+<link rel="import" href="../../bower_components/polymer/polymer-element.html">
+
+<dom-module id="user-card">
+  <template>
+    <style include="shared-styles">
+      :host {
+        display: block;
+        padding: 10px;
+      }
+      h1{
+          border-bottom: 2px solid #f1f1f1;
+      }
+      .card {
+        border: 2px solid #f1f1f1;
+        width: 40%;
+        margin-top:2%;
+      }
+      .card:hover {
+        box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+      }
+      .container {
+        padding: 2px 16px;
+      }
+    </style>
+    <div class="card">
+      <img src="./src/multimedia/bmwLogo.png" alt="Avatar" style="width:100%">
+      <div class="container">
+        <h4><b><slot name="usrname"></slot></b></h4> 
+        <p><slot name="usroccupation"></slot></p>
+        <slot></slot>
+      </div>
+    </div>
+  </template>
+
+  <script>
+    class UserCard extends Polymer.Element {
+      static get is() { return 'user-card';}
+      static get properties(){
+          return{
+            }
+          }
+      }
+      /*static get observers() {
+        return [
+        // Observer method name, followed by a list of dependencies, in parenthesis
+        'userListChanged(elementvalue)'
+        ]
+      }
+      userListChanged(changedMessage){
+        //console.log(changedMessage, " Message changed property");
+      }
+    }*/
+
+    window.customElements.define(UserCard.is, UserCard);
+  </script>
+</dom-module>

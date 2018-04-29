@@ -10,13 +10,59 @@
         display: block;
         padding: 10px;
       }
+      h1{
+          border-bottom: 2px solid #f1f1f1;
+      }
+      label{
+        display:block;
+      }
+      input[type=text], input[type=date] {
+        width: 100%;
+        padding: 15px 0px;
+        margin: 5px 0 22px 0;
+        display: inline-block;
+        border: none;
+        background: #f1f1f1;
+      }
+      input::-webkit-input-placeholder{
+        padding:10px;
+      }
+      input::-webkit-datetime-edit{
+        padding-left:10px;
+      }
+      button {
+        background-color: #4CAF50;
+        color: white;
+        padding: 14px 20px;
+        margin: 8px 0;
+        border: none;
+        cursor: pointer;
+        width: 100%;
+        opacity: 0.9;
+      }
+      .card{
+        position:relative;
+      }
     </style>
 
     <div class="card">
-      <h1>Users View [[users]]</h1>
-      Enter New User
-      <input type="text" id="nwUser" placeholder="Enter Users Name" on-change="updateList">
-      </div>
+
+      <h1>Enter User Deails</h1>
+      <label for="usrName"><b>User Name</b></label>
+      <input type="text" id="usrName" name="usrName" placeholder="User Name">
+      
+      <label for="usrSurname"><b>Surname</b></label>
+      <input type="text" id="usrSurname" name="usrSurname" placeholder="Surname">
+      
+      <label for="userAge"><b>User Department</b></label>
+      <input type="text" id="usrDepartment" name="usrDepartment" placeholder="Department">
+      
+      <label for="dob"><b>User DOB</b></label>
+      <input type="date" id="dob" name="dob" placeholder="Enter Users Name">
+      <br>
+      <button on-click="updateList">Submit Record</button>
+
+    </div>
   </template>
 
   <script>
@@ -41,8 +87,18 @@
         ]
       }
       updateList(){
+        //let newAddition ="new test addition";
           //console.log('Input changed');
-          let newAddition = this.$.nwUser.value;
+          let newAddition = {};
+          newAddition.name = this.$.usrName.value;
+          this.$.usrName.value = '';
+          newAddition.surname = this.$.usrSurname.value;
+          this.$.usrSurname.value = '';
+          newAddition.department = this.$.usrDepartment.value;
+          this.$.usrDepartment.value = '';
+          newAddition.dob = this.$.dob.value;
+          this.$.dob.value = '';
+
           this.dispatch({type:'ADD_USER',
           newValue: newAddition});
       }
